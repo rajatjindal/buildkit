@@ -110,7 +110,7 @@ func (g *cacheRefGetter) getRefCacheDirNoCache(ctx context.Context, key string, 
 		if err != nil {
 			return nil, err
 		}
-		bklog.G(ctx).Debugf("created new ref for cache dir %q: %s", id, newRef.ID())
+		bklog.G(ctx).Debugf("created new ref for cache dir %q: %s with key %s", id, newRef.ID(), key)
 		return newRef, nil
 	}
 
@@ -124,7 +124,7 @@ func (g *cacheRefGetter) getRefCacheDirNoCache(ctx context.Context, key string, 
 		locked := false
 		for _, si := range sis {
 			if mRef, err := g.cm.GetMutable(ctx, si.ID()); err == nil {
-				bklog.G(ctx).Debugf("reusing ref for cache dir %q: %s", id, mRef.ID())
+				bklog.G(ctx).Debugf("reusing ref for cache dir %q: %s with key: %s", id, mRef.ID(), key)
 				return mRef, nil
 			} else if errors.Is(err, cache.ErrLocked) {
 				locked = true
