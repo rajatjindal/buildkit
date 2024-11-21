@@ -72,14 +72,15 @@ type Opt struct {
 
 type Controller struct { // TODO: ControlService
 	// buildCount needs to be 64bit aligned
-	buildCount       int64
-	opt              Opt
-	solver           *llbsolver.Solver
-	history          *llbsolver.HistoryQueue
-	cache            solver.CacheManager
-	gatewayForwarder *controlgateway.GatewayForwarder
-	throttledGC      func()
-	gcmu             sync.Mutex
+	buildCount                   int64
+	opt                          Opt
+	solver                       *llbsolver.Solver
+	history                      *llbsolver.HistoryQueue
+	cache                        solver.CacheManager
+	gatewayForwarder             *controlgateway.GatewayForwarder
+	throttledGC                  func()
+	throttledReleaseUnreferenced func()
+	gcmu                         sync.Mutex
 	*tracev1.UnimplementedTraceServiceServer
 }
 
@@ -118,6 +119,8 @@ func NewController(opt Opt) (*Controller, error) {
 		gatewayForwarder: gatewayForwarder,
 	}
 	c.throttledGC = throttle.After(time.Minute, c.gc)
+	// use longer interval for releaseUnreferencedCache deleting links quickly is less important
+	c.throttledReleaseUnreferenced = throttle.After(5*time.Minute, func() { c.releaseUnreferencedCache(context.TODO()) })
 
 	defer func() {
 		time.AfterFunc(time.Second, c.throttledGC)
@@ -181,6 +184,10 @@ func (c *Controller) DiskUsage(ctx context.Context, r *controlapi.DiskUsageReque
 		}
 	}
 	return resp, nil
+}
+
+func (c *Controller) releaseUnreferencedCache(ctx context.Context) error {
+	return c.cache.ReleaseUnreferenced(ctx)
 }
 
 func (c *Controller) Prune(req *controlapi.PruneRequest, stream controlapi.Control_PruneServer) error {
@@ -611,6 +618,7 @@ func (c *Controller) gc() {
 	<-done
 	if size > 0 {
 		bklog.G(ctx).Debugf("gc cleaned up %d bytes", size)
+		go c.throttledReleaseUnreferenced()
 	}
 }
 
