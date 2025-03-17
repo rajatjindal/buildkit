@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"path"
 	"strconv"
 	"strings"
@@ -507,10 +506,6 @@ func WithInternalName(name string) llb.ConstraintsOpt {
 }
 
 func (bc *Client) dockerIgnorePatterns(ctx context.Context, bctx *buildContext) ([]string, error) {
-	if true {
-		return nil, fmt.Errorf("from inside BUILD FUNCTION part 7. %s", bc.dockerignore)
-	}
-
 	if bc.dockerignore == nil {
 		sessionID := bc.bopts.SessionID
 		if v, ok := bc.localsSessionIDs[bctx.contextLocalName]; ok {
