@@ -600,9 +600,6 @@ func toDispatchState(ctx context.Context, dt []byte, opt ConvertOpt) (*dispatchS
 		if err != nil {
 			return nil, err
 		}
-		if true {
-			return nil, fmt.Errorf("from inside BUILD FUNCTION part 6. %s", dockerIgnorePatterns)
-		}
 
 		if len(dockerIgnorePatterns) > 0 {
 			dockerIgnoreMatcher, err = patternmatcher.New(dockerIgnorePatterns)

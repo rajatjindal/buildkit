@@ -507,6 +507,10 @@ func (bc *Client) dockerIgnorePatterns(ctx context.Context, bctx *buildContext) 
 		return nil, fmt.Errorf("Inside dockerignore patterns")
 	}
 
+	if true {
+		return nil, fmt.Errorf("from inside BUILD FUNCTION part 7. %s", bc.dockerignore)
+	}
+
 	if bc.dockerignore == nil {
 		sessionID := bc.bopts.SessionID
 		if v, ok := bc.localsSessionIDs[bctx.contextLocalName]; ok {
