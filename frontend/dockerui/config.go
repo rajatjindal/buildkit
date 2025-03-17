@@ -504,10 +504,6 @@ func WithInternalName(name string) llb.ConstraintsOpt {
 
 func (bc *Client) dockerIgnorePatterns(ctx context.Context, bctx *buildContext) ([]string, error) {
 	if true {
-		return nil, fmt.Errorf("Inside dockerignore patterns")
-	}
-
-	if true {
 		return nil, fmt.Errorf("from inside BUILD FUNCTION part 7. %s", bc.dockerignore)
 	}
 
