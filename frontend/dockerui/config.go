@@ -320,10 +320,6 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 
 		filenames := []string{bctx.filename, bctx.filename + ".dockerignore"}
 
-		if true {
-			return nil, fmt.Errorf("rj.Dockerfile. well i am here %s. filenames: %s", bctx.filename, filenames)
-		}
-
 		// dockerfile is also supported casing moby/moby#10858
 		if path.Base(bctx.filename) == DefaultDockerfileName {
 			filenames = append(filenames, path.Join(path.Dir(bctx.filename), strings.ToLower(DefaultDockerfileName)))
@@ -394,6 +390,10 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 	if err == nil {
 		bc.dockerignore = dt
 		bc.dockerignoreName = bctx.filename + ".dockerignore"
+	}
+
+	if true {
+		return nil, fmt.Errorf("rj.Dockerfile. well i am here %s. filename: %s. ignorefilecontent: %s", bctx.filename, bc.dockerignoreName, string(bc.dockerignore))
 	}
 
 	return &Source{
