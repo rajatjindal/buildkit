@@ -138,6 +138,7 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 
 		inputCtx, ok := inputs[DefaultLocalNameContext]
 		if ok {
+			return nil, fmt.Errorf("inside input ctx. but why? %#v", inputCtx)
 			bctx.context = &inputCtx
 		}
 	}
