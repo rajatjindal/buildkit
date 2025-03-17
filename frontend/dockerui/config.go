@@ -392,10 +392,6 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 		bc.dockerignoreName = bctx.filename + ".dockerignore"
 	}
 
-	if true {
-		return nil, fmt.Errorf("rj.Dockerfile. well i am here %s. filename: %s. ignorefilecontent: %s", bctx.filename, bc.dockerignoreName, string(bc.dockerignore))
-	}
-
 	return &Source{
 		SourceMap: smap,
 		Warn: func(ctx context.Context, msg string, opts client.WarnOpts) {
