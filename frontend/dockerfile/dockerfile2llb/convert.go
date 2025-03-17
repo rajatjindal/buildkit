@@ -601,6 +601,9 @@ func toDispatchState(ctx context.Context, dt []byte, opt ConvertOpt) (*dispatchS
 			return nil, err
 		}
 
+		if true {
+			return nil, fmt.Errorf("inside docker ignore matcher %s", dockerIgnorePatterns)
+		}
 		// IT WAS COMING OUT TO BE EMPTY STRING HERE. BUT WHY?
 		if len(dockerIgnorePatterns) > 0 {
 			dockerIgnoreMatcher, err = patternmatcher.New(dockerIgnorePatterns)

@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"path"
 	"strconv"
 	"strings"
@@ -390,10 +389,6 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 	if err == nil {
 		bc.dockerignore = dt
 		bc.dockerignoreName = bctx.filename + ".dockerignore"
-	}
-
-	if true {
-		return nil, fmt.Errorf("INSIDE READ ENTRY POINT filename: %q. Filecontent: %q", bc.dockerignoreName, bc.dockerignore)
 	}
 
 	return &Source{
