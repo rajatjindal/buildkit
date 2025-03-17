@@ -594,6 +594,10 @@ func toDispatchState(ctx context.Context, dt []byte, opt ConvertOpt) (*dispatchS
 	buildContext := &mutableOutput{}
 	ctxPaths := map[string]struct{}{}
 
+	if true {
+		return nil, fmt.Errorf("from inside BUILD FUNCTION part 5")
+	}
+
 	var dockerIgnoreMatcher *patternmatcher.PatternMatcher
 	if opt.Client != nil {
 		dockerIgnorePatterns, err := opt.Client.DockerIgnorePatterns(ctx)

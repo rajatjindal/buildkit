@@ -2,7 +2,6 @@ package builder
 
 import (
 	"context"
-	"fmt"
 	"strings"
 	"sync"
 
@@ -132,10 +131,6 @@ func Build(ctx context.Context, c client.Client) (_ *client.Result, err error) {
 		opt.TargetPlatform = platform
 		if idx != 0 {
 			opt.Warn = nil
-		}
-
-		if true {
-			return nil, nil, nil, fmt.Errorf("from inside BUILD FUNCTION part 3")
 		}
 
 		st, img, baseImg, scanTarget, err := dockerfile2llb.Dockerfile2LLB(ctx, src.Data, opt)
