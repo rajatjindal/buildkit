@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"path"
 	"strconv"
 	"strings"
@@ -312,6 +313,10 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 		if bctx.dockerfile != nil {
 			src = bctx.dockerfile
 		}
+	}
+
+	if bctx.filename == "rj.Dockerfile" {
+		return nil, fmt.Errorf("rj.Dockerfile. well i am here")
 	}
 
 	if src == nil {
