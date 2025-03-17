@@ -4,6 +4,7 @@ import (
 	"archive/tar"
 	"bytes"
 	"context"
+	"fmt"
 	"path/filepath"
 	"regexp"
 	"strconv"
@@ -74,9 +75,16 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 		keepGit = v
 	}
 	if st, ok := DetectGitContext(opts[localNameContext], keepGit); ok {
+		if true {
+			return nil, fmt.Errorf("from inside git context")
+		}
 		bctx.context = st
 		bctx.dockerfile = st
 	} else if st, filename, ok := DetectHTTPContext(opts[localNameContext]); ok {
+		if true {
+			return nil, fmt.Errorf("from inside Detect http context")
+		}
+
 		def, err := st.Marshal(ctx, bc.marshalOpts()...)
 		if err != nil {
 			return nil, errors.Wrapf(err, "failed to marshal httpcontext")
@@ -113,6 +121,9 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 		}
 		bctx.dockerfile = bctx.context
 	} else if (&gwcaps).Supports(gwpb.CapFrontendInputs) == nil {
+		if true {
+			return nil, fmt.Errorf("from inside capfrontend inputs")
+		}
 		inputs, err := bc.client.Inputs(ctx)
 		if err != nil {
 			return nil, errors.Wrapf(err, "failed to get frontend inputs")
@@ -132,7 +143,14 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 	}
 
 	if bctx.context != nil {
+		if true {
+			return nil, fmt.Errorf("from inside bctx.context is not nil")
+		}
+
 		if sub, ok := opts[keyContextSubDir]; ok {
+			if true {
+				return nil, fmt.Errorf("from inside keycontext sub dir thingy")
+			}
 			bctx.context = scopeToSubDir(bctx.context, sub)
 		}
 	}
