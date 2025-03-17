@@ -315,8 +315,8 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 		}
 	}
 
-	if bctx.filename == "rj.Dockerfile" {
-		return nil, fmt.Errorf("rj.Dockerfile. well i am here")
+	if true {
+		return nil, fmt.Errorf("rj.Dockerfile. well i am here %s", bctx.filename)
 	}
 
 	if src == nil {
