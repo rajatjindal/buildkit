@@ -138,20 +138,12 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 
 		inputCtx, ok := inputs[DefaultLocalNameContext]
 		if ok {
-			return nil, fmt.Errorf("inside input ctx. but why? %#v", inputCtx)
 			bctx.context = &inputCtx
 		}
 	}
 
 	if bctx.context != nil {
-		if true {
-			return nil, fmt.Errorf("from inside bctx.context is not nil")
-		}
-
 		if sub, ok := opts[keyContextSubDir]; ok {
-			if true {
-				return nil, fmt.Errorf("from inside keycontext sub dir thingy")
-			}
 			bctx.context = scopeToSubDir(bctx.context, sub)
 		}
 	}
