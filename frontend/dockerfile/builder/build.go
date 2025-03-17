@@ -125,10 +125,6 @@ func Build(ctx context.Context, c client.Client) (_ *client.Result, err error) {
 		}
 	}
 
-	if true {
-		return nil, fmt.Errorf("from inside BUILD FUNCTION part 2")
-	}
-
 	scanTargets := sync.Map{}
 
 	rb, err := bc.Build(ctx, func(ctx context.Context, platform *ocispecs.Platform, idx int) (client.Reference, *dockerspec.DockerOCIImage, *dockerspec.DockerOCIImage, error) {
@@ -136,6 +132,10 @@ func Build(ctx context.Context, c client.Client) (_ *client.Result, err error) {
 		opt.TargetPlatform = platform
 		if idx != 0 {
 			opt.Warn = nil
+		}
+
+		if true {
+			return nil, nil, nil, fmt.Errorf("from inside BUILD FUNCTION part 3")
 		}
 
 		st, img, baseImg, scanTarget, err := dockerfile2llb.Dockerfile2LLB(ctx, src.Data, opt)
