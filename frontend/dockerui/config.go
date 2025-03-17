@@ -482,13 +482,13 @@ func (bc *Client) DockerIgnorePatterns(ctx context.Context) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	if true {
-		return nil, fmt.Errorf("from inside BUILD FUNCTION part 8. %#v", bctx.context)
-	}
+	// if true {
+	// 	return nil, fmt.Errorf("from inside BUILD FUNCTION part 8. %#v", bctx.context)
+	// }
 
-	if bctx.context != nil {
-		return nil, nil
-	}
+	// if bctx.context != nil {
+	// 	return nil, nil
+	// }
 
 	return bc.dockerIgnorePatterns(ctx, bctx)
 }
