@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"path"
 	"strconv"
 	"strings"
@@ -483,7 +484,8 @@ func (bc *Client) DockerIgnorePatterns(ctx context.Context) ([]string, error) {
 	}
 
 	if bctx.context != nil {
-		return nil, nil
+		return nil, fmt.Errorf("bctx.context IS NOT EMPTY")
+		// return nil, nil
 	}
 
 	return bc.dockerIgnorePatterns(ctx, bctx)
