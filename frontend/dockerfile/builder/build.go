@@ -87,9 +87,6 @@ func Build(ctx context.Context, c client.Client) (_ *client.Result, err error) {
 		},
 	}
 
-	if true {
-		return nil, fmt.Errorf("from inside BUILD FUNCTION")
-	}
 	if res, ok, err := bc.HandleSubrequest(ctx, dockerui.RequestHandler{
 		Outline: func(ctx context.Context) (*outline.Outline, error) {
 			return dockerfile2llb.Dockerfile2Outline(ctx, src.Data, convertOpt)
@@ -126,6 +123,10 @@ func Build(ctx context.Context, c client.Client) (_ *client.Result, err error) {
 		if err != nil {
 			return nil, err
 		}
+	}
+
+	if true {
+		return nil, fmt.Errorf("from inside BUILD FUNCTION part 2")
 	}
 
 	scanTargets := sync.Map{}
