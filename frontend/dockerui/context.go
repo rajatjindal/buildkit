@@ -121,9 +121,9 @@ func (bc *Client) initContext(ctx context.Context) (*buildContext, error) {
 		}
 		bctx.dockerfile = bctx.context
 	} else if (&gwcaps).Supports(gwpb.CapFrontendInputs) == nil {
-		if true {
-			return nil, fmt.Errorf("from inside capfrontend inputs")
-		}
+		// if true {
+		// 	return nil, fmt.Errorf("from inside capfrontend inputs")
+		// }
 		inputs, err := bc.client.Inputs(ctx)
 		if err != nil {
 			return nil, errors.Wrapf(err, "failed to get frontend inputs")
