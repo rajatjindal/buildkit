@@ -315,14 +315,14 @@ func (bc *Client) ReadEntrypoint(ctx context.Context, lang string, opts ...llb.L
 		}
 	}
 
-	if true {
-		return nil, fmt.Errorf("rj.Dockerfile. well i am here %s", bctx.filename)
-	}
-
 	if src == nil {
 		name := "load build definition from " + bctx.filename
 
 		filenames := []string{bctx.filename, bctx.filename + ".dockerignore"}
+
+		if true {
+			return nil, fmt.Errorf("rj.Dockerfile. well i am here %s. filenames: %s", bctx.filename, filenames)
+		}
 
 		// dockerfile is also supported casing moby/moby#10858
 		if path.Base(bctx.filename) == DefaultDockerfileName {
